@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <title>InstantMessage</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
     
     <style>
@@ -14,7 +15,7 @@
 		.message {margin: 5px; background: #eee;}
     	.message .title {height: 30px; padding: 4px;}
     	.message .title .time {float: left; width: 70px; font-size: 12px;}
-    	.message .text {color: #447AA4; font-size: 14px;}
+    	.message .text {color: #447AA4; font-size: 14px; padding: 4px;}
     </style>
     
     <script type="text/javascript">
@@ -22,12 +23,14 @@
     		setInterval(function() {
     			$('.window .body .message').css('background', '#eee');
     			$.get('/index/ajaxtweet', function (data) {
-    				$('.window .body .message:first').before(data);
-    				$('.window .body .message:first').css('background', '#ddd');
-    				$('#count').text($('#count').text() * 1 + 1);
-    			})
+    				if (data != undefined && data != '') { 
+						$('.window .body .message:first').before(data);
+						$('.window .body .message:first').css('background', '#ddd');
+						$('#count').text(parseInt($('#count').text()) + 1);
+					}
+    			});
     			
-    		}, 8000)
+    		}, 8000);
     	});
     	
     </script>
@@ -39,7 +42,7 @@
 			<h2>Public tweets: (<span id="count"><?php echo $this->count;?></span>)</h2>
 		</div>
 		<div class="body">
-			<?php echo $this->tweets; ?>
+			<?php echo $this->renderMessages($this->tweets); ?>
 		</div>
 	</div>
 </body>

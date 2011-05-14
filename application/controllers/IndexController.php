@@ -10,14 +10,14 @@ class IndexController extends Zend_Controller_Action
 			array('name' => 'Dmitry', 'date' => date('d-m-Y', strtotime('one hour ago')), 'text' => 'Test message from user 2'),
 			array('name' => 'Jack', 'date' => date('d-m-Y', strtotime('two hour ago')), 'text' => 'Hello world'),
 		);
-		$template = 'hello';
+
 		$messages = InstantMessage_Broker::getInstance();
 		foreach ($substitution as $values)
 		{
-			$messages->addMessage($template, $values, 'FileMessage', array('extension' => '.phtml'));
+			$messages->addMessage('hello', $values, 'FileMessage', array('extension' => '.phtml'));
 		}
 		
-		$this->view->messageOutput = $messages->render();
+		$this->view->messages = $messages->getMessages();
     }
 	
 	/**
@@ -25,6 +25,8 @@ class IndexController extends Zend_Controller_Action
 	 */
 	public function baseusageAction()
 	{
+		$this->_helper->viewRenderer->setNoRender();
+		
 		$message = new InstantMessage_Message_FileMessage('hello', array('name' => 'Dmitry'));
 		
 		$message->text = 'Hello world!';
@@ -33,8 +35,6 @@ class IndexController extends Zend_Controller_Action
 		
 		// or echo $message;
 		echo $message->render();
-		
-		die();
 	}
 
 	public function twitterAction()
@@ -59,7 +59,7 @@ class IndexController extends Zend_Controller_Action
 			}
 	
 			$this->view->count = count($tweets->status);
-			$this->view->tweets = $messages->render();
+			$this->view->tweets = $messages->getMessages();
 		}
 	}
 	
@@ -84,6 +84,31 @@ class IndexController extends Zend_Controller_Action
 				echo $message->render();
 			}
 		}
+	}
+	
+	public function removeAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		
+		$messagesBroker = InstantMessage_Broker::getInstance();
+		
+		//create message
+		$message = new InstantMessage_Message_FileMessage('hello');
+		$message->name = 'Bill';
+		$message->time = date('d-m-Y', strtotime('now'));
+		$message->text = 'Some text';
+		
+		$messagesBroker->setMessage($message);
+		
+		echo 'Before remove:';
+		var_dump($messagesBroker->getMessages());
+		
+		// remove message by object
+		$messagesBroker->removeMessage($message);
+		
+		echo 'After remove:';
+		var_dump($messagesBroker->getMessages());
+		
 	}
 }
 

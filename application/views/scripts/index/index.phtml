@@ -1,2 +1,12 @@
-Messages: <br/><br/>
-<?php echo $this->messageOutput; ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>InstantMessage</title>
+</head>
+
+<body>
+	Messages: <br/><br/>
+	<?php echo $this->renderMessages($this->messages); ?>
+</body>
+</html>

@@ -1,6 +1,3 @@
 <?php
 
-class InstantMessage_Exception extends Zend_Exception
-{
-	
-}
+class InstantMessage_Exception extends Zend_Exception {}

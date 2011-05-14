@@ -58,6 +58,27 @@ abstract class InstantMessage_Message_Abstract
 		return isset($this->_values[$key]) ? $this->_values[$key] : null;
 	}
 	
+	/**
+	 * Magic __isset method
+	 * @param string $key
+	 */
+	public function __isset($key)
+	{
+		return isset($this->_values[$key]) ? true : false;
+	}
+
+	/**
+	 * Magic __empty method
+	 * @param string $key
+	 */
+	public function __empty($key)
+	{
+		return !isset($this->_values[$key]) || empty($key) ? true : false;
+	}
+	
+	/**
+	 * Magic __toString method. Renders message
+	 */
 	public function __toString()
 	{
 		return $this->render();

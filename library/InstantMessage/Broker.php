@@ -66,6 +66,7 @@ class InstantMessage_Broker
 	{
 		$mesageClass = 'InstantMessage_Message_' . $type;
 		$message = new $mesageClass($template, $values, $options);
+		
 		if (!$message instanceof InstantMessage_Message_Interface)
 		{
 			throw new InstantMessage_Exception('Message should be instance of InstantMessage_Message_Interface');
@@ -83,6 +84,15 @@ class InstantMessage_Broker
 		$this->_messages[] = $message;
 		return count($this->_messages) - 1;
 	}
+
+	/**
+	 * Sets messages
+	 * @param array $messages
+	 */
+	public function setMessages(array $messages)
+	{
+		$this->_messages = $messages;
+	}
 	
 	/**
 	 * Gets messages
@@ -95,10 +105,32 @@ class InstantMessage_Broker
 	
 	/**
 	 * Removes message
-	 * @param int $index
+	 * @param int|InstantMessage_Message_Interface $index
 	 */
 	public function removeMessage($index)
 	{
-		unset($this->_messages[$index]);
+		if ($index instanceof InstantMessage_Message_Interface)
+		{
+			$this->removeMessageByObject($index);
+		}
+		elseif (isset($this->_messages[$index]))
+		{
+			unset($this->_messages[$index]);
+		}
+	}
+	
+	/**
+	 * Removes message
+	 * @param $message InstantMessage_Message_Interface $index
+	 */
+	public function removeMessageByObject(InstantMessage_Message_Interface $object)
+	{
+		foreach ($this->_messages as $key => $message)
+		{
+			if (spl_object_hash($object) == spl_object_hash($message))
+			{
+				unset($this->_messages[$key]);
+			}
+		}
 	}
 }
