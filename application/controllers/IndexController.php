@@ -101,13 +101,17 @@ class IndexController extends Zend_Controller_Action
 		$messagesBroker->setMessage($message);
 		
 		echo 'Before remove:';
+		echo '<pre>';
 		var_dump($messagesBroker->getMessages());
+		echo '</pre>';
 		
 		// remove message by object
 		$messagesBroker->removeMessage($message);
 		
 		echo 'After remove:';
+		echo '<pre>';
 		var_dump($messagesBroker->getMessages());
+		echo '</pre>';
 		
 	}
 }
