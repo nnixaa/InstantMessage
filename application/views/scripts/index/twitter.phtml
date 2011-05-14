@@ -42,7 +42,11 @@
 			<h2>Public tweets: (<span id="count"><?php echo $this->count;?></span>)</h2>
 		</div>
 		<div class="body">
-			<?php echo $this->renderMessages($this->tweets); ?>
+			<?php if (empty($this->tweets)) { ?>
+				There ara no messages.
+			<?php } else { ?>
+				<?php echo $this->renderMessages($this->tweets); ?>
+			<?php } ?>
 		</div>
 	</div>
 </body>

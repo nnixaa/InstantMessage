@@ -60,6 +60,11 @@ class IndexController extends Zend_Controller_Action
 	
 			$this->view->count = count($tweets->status);
 			$this->view->tweets = $messages->getMessages();
+		} 
+		else
+		{
+			$this->view->count = 0;
+			$this->view->tweets = array();
 		}
 	}
 	
