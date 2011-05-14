@@ -22,7 +22,7 @@
     	$(function() {
     		setInterval(function() {
     			$('.window .body .message').css('background', '#eee');
-    			$.get(<?php echo $this->baseUrl(); ?>'/index/ajaxtweet', function (data) {
+    			$.get('<?php echo $this->baseUrl(); ?>/index/ajaxtweet', function (data) {
     				if (data != undefined && data != '') { 
 						$('.window .body .message:first').before(data);
 						$('.window .body .message:first').css('background', '#ddd');
