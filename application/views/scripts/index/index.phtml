@@ -7,22 +7,55 @@
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.imessage-0.0.1.js"></script>
     <script type="text/javascript">
     $(function(){
+
     	$('#messages-container').imessage({
-    		url: 'index/ajaximessage',
+    		url: '<?php echo $this->baseUrl(); ?>/index/ajaximessage',
     		timeout: 10,
-    		onRequest: function () {console.log('send request')},
-    		onResponse: function () {console.log('get response')},
-    		onMessageHover: function () {console.log('message hover')},
-    		onMessageClick: function () {console.log('message click')}
+    		onRequest: function () {
+    			$('#imessage-loader').show();
+    		},
+    		onResponse: function (data) {
+    			$('#imessage-loader').hide();
+    			$('#imessage-unread').text(parseInt($('#imessage-unread').text()) + data.length);
+    		},
+    		onMessageHover: function () {
+    			$(this).removeClass('imessage-message-new');
+    		},
+    		onMessageClick: function () {
+    		
+    			if ($(this).hasClass('imessage-message-unread')) {
+    				$('#imessage-unread').text(parseInt($('#imessage-unread').text()) - 1);
+    			}
+    			
+    			$(this).removeClass('imessage-message-new');
+    			$(this).removeClass('imessage-message-unread');
+    		}
+    	});
+    	
+    	$('.header').click(function() {
+    		$('#messages-container').toggle();
     	});
     })
     </script>
+    <style type="text/css">
+    	.window {position: absolute; width: 200px; bottom: 0px; right: 30px; border: 1px solid #254588; border-bottom: none;}
+    	.window .header {background: #6D84B4; height: 19px; padding-top: 2px; cursor: pointer;}
+    	#imessage-loader {display: none;}
+		#imessage-unread {color: #ffffff; font-weight: bold; float: right; margin-right: 4px;}
+    	.window .messages-container {overflow: auto;height: 278px;}
+    	.window .messages-container .imessage-message {background: #e5eaf1; padding: 3px; border: 1px solid #cccccc; border-top: none;}
+    	.imessage-message .name {font-weight: bold;}
+    	.imessage-message-unread {background: #bdc7d8!important;}
+    	.imessage-message-new {background: #ece9d8!important;}
+    	.clear {clear: both}
+    </style>
 </head>
 
 <body>
-	Messages: <br/><br/>
-	<?php echo $this->renderMessages($this->messages); ?>
-	
-	<div id="messages-container"></div>
+	<div class="window">
+		<div class="header"><img id="imessage-loader" src="<?php echo $this->baseUrl(); ?>/img/loader.gif" /> <div id="imessage-unread">0</div></div>
+		<div class="clear"></div>
+		<div id="messages-container" class="messages-container"></div>
+	</div>
 </body>
 </html>

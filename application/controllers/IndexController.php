@@ -125,10 +125,10 @@ class IndexController extends Zend_Controller_Action
 		$this->_helper->viewRenderer->setNoRender();
 		
 		$messages = array(
-			'<strong>Jack</strong><br><i>hello world!</i>',
-			'<strong>Bill</strong><br><i>text text</i>',
-			'<strong>John</strong><br><i>message from John</i>',
-			'<strong>Ted</strong><br><i>hi!</i>',
+			'<div class="name">Jack</div><div class="text">hello world!</div>',
+			'<div class="name">Bill</div><div class="text">long long long long long long message</div>',
+			'<div class="name">John</div><div class="text">message from John</div>',
+			'<div class="name">Ted</div><div class="text">hi!</div>',
 		);
 		
 
