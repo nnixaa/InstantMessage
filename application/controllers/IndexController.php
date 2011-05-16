@@ -119,5 +119,20 @@ class IndexController extends Zend_Controller_Action
 		echo '</pre>';
 		
 	}
+	
+	public function ajaximessageAction()
+	{
+		$this->_helper->viewRenderer->setNoRender();
+		
+		$messages = array(
+			'<strong>Jack</strong><br><i>hello world!</i>',
+			'<strong>Bill</strong><br><i>text text</i>',
+			'<strong>John</strong><br><i>message from John</i>',
+			'<strong>Ted</strong><br><i>hi!</i>',
+		);
+		
+
+		echo $this->_helper->json(array($messages[array_rand($messages)]), true);
+	}
 }
 

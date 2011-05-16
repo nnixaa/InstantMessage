@@ -3,10 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <title>InstantMessage</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.imessage-0.0.1.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	$('#messages-container').imessage({
+    		url: 'index/ajaximessage',
+    		timeout: 10,
+    		onRequest: function () {console.log('send request')},
+    		onResponse: function () {console.log('get response')},
+    		onMessageHover: function () {console.log('message hover')},
+    		onMessageClick: function () {console.log('message click')}
+    	});
+    })
+    </script>
 </head>
 
 <body>
 	Messages: <br/><br/>
 	<?php echo $this->renderMessages($this->messages); ?>
+	
+	<div id="messages-container"></div>
 </body>
 </html>
