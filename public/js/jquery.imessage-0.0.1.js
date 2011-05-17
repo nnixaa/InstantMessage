@@ -1,7 +1,6 @@
-/**
- * @author d.nehaychik
+/*!
+ * Imessage jQuery plugin v0.0.1
  */
-
 (function($){
 	$.fn.imessage = function(options) {
 		
