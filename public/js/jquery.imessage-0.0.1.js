@@ -84,7 +84,7 @@
 	function callEvent(settings, event, _this, data) {
 
 		if (settings[event] != null && settings[event] instanceof Function) {
-			settings[event].call(this, data);
+			settings[event].call(_this, data);
 		}
 	}
 
