@@ -3,9 +3,9 @@
 class IndexController extends Zend_Controller_Action
 {
 
-    public function indexAction()
-    {
-    	$substitution = array(
+	public function indexAction()
+	{
+		$substitution = array(
 			array('name' => 'Alex', 'date' => date('d-m-Y', strtotime('now')), 'text' => 'Test message from user 1'),
 			array('name' => 'Dmitry', 'date' => date('d-m-Y', strtotime('one hour ago')), 'text' => 'Test message from user 2'),
 			array('name' => 'Jack', 'date' => date('d-m-Y', strtotime('two hour ago')), 'text' => 'Hello world'),
@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
 		}
 		
 		$this->view->messages = $messages->getMessages();
-    }
+	}
 	
 	/**
 	 * Base usage
@@ -124,15 +124,24 @@ class IndexController extends Zend_Controller_Action
 	{
 		$this->_helper->viewRenderer->setNoRender();
 		
-		$messages = array(
-			'<div class="name">Jack</div><div class="text">hello world!</div>',
-			'<div class="name">Bill</div><div class="text">long long long long long long message</div>',
-			'<div class="name">John</div><div class="text">message from John</div>',
-			'<div class="name">Ted</div><div class="text">hi!</div>',
+		$substitution = array(
+			array('name' => 'Alex', 'text' => 'Test message from user 1'),
+			array('name' => 'Bill', 'text' => 'Test message from user 2'),
+			array('name' => 'Jack', 'text' => 'Hello world'),
 		);
-		
+		shuffle($substitution);
 
-		echo $this->_helper->json(array($messages[array_rand($messages)]), true);
+		for ($i = 0; $i < rand(0, 3); $i ++) {
+			unset($substitution[$i]);
+		}
+		
+		$messages = InstantMessage_Broker::getInstance();
+		foreach ($substitution as $values)
+		{
+			$messages->addMessage('hello', $values);
+		}
+		
+		echo $this->_helper->json(array('messages' => $messages->render()), true);
 	}
 }
 
