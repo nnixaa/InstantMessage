@@ -7,12 +7,12 @@
     <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jquery.imessage-0.0.1.min.js"></script>
     <script type="text/javascript">
     $(function(){
-		
-		$('#messages-container-base').imessage({
-			url: '<?php echo $this->baseUrl(); ?>/index/ajaximessage',
-			timeout: 15
-		});
-		
+    	
+    	$('#messages-container-base').imessage({
+    		url: '<?php echo $this->baseUrl(); ?>/index/ajaximessage',
+    		timeout: 15
+    	});
+    	
     	$('#messages-container').imessage({
     		url: '<?php echo $this->baseUrl(); ?>/index/ajaximessage',
     		timeout: 10,
@@ -52,7 +52,7 @@
     	.window {position: absolute; width: 200px; bottom: 0px; right: 30px; border: 1px solid #254588; border-bottom: none;}
     	.window .header {background: #6D84B4; height: 19px; padding-top: 2px; cursor: pointer;}
     	#imessage-loader {display: none;}
-		#imessage-unread {color: #ffffff; font-weight: bold; float: right; margin-right: 4px;}
+    	#imessage-unread {color: #ffffff; font-weight: bold; float: right; margin-right: 4px;}
     	.window .messages-container {overflow: auto;height: 278px;}
     	.window .messages-container .imessage-item {background: #e5eaf1; padding: 3px; border: 1px solid #cccccc; border-top: none;}
     	.imessage-item .name {font-weight: bold;}
