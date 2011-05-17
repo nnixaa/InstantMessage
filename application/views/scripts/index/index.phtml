@@ -38,7 +38,10 @@
     		}
     	});
     	
-    	$('.header').click(function() {
+    	$('#header-base').click(function() {
+    		$('#messages-container-base').toggle();
+    	});
+    	$('#header').click(function() {
     		$('#messages-container').toggle();
     	});
     })
@@ -61,13 +64,13 @@
 <body>
 	
 	<div class="window base">
-		<div class="header"></div>
+		<div class="header" id="header-base"></div>
 		<div class="clear"></div>
 		<div id="messages-container-base" class="messages-container"></div>
 	</div>
 	
 	<div class="window">
-		<div class="header"><img id="imessage-loader" src="<?php echo $this->baseUrl(); ?>/img/loader.gif" /> <div id="imessage-unread">0</div></div>
+		<div class="header" id="header"><img id="imessage-loader" src="<?php echo $this->baseUrl(); ?>/img/loader.gif" /> <div id="imessage-unread">0</div></div>
 		<div class="clear"></div>
 		<div id="messages-container" class="messages-container"></div>
 	</div>
