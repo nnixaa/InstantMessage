@@ -7,11 +7,11 @@
 		var settings = {
 			'timeout':			60,
 			'url':				null,
-			'onMessageHover':	null,
-			'onMessageClick':	null,
-			'onRequest':		null,
-			'onResponse':		null,
-			'onBeforeInsert':	null,
+			'onMessageHover':	function() {},
+			'onMessageClick':	function() {},
+			'onRequest':		function() {},
+			'onResponse':		function() {},
+			'onBeforeInsert':	function() {},
 			'messageWrapper':	'<div>',
 			'messageClass':		'imessage-item'
 		};
@@ -72,19 +72,14 @@
 	 * Sets element event
 	 */
 	function addEvent(element, settings, customEvent, event) {
-		if (settings[customEvent] != null && settings[customEvent] instanceof Function) {
-			element.bind(event, settings[customEvent]);
-		}
+		element.bind(event, settings[customEvent]);
 	}
 	
 	/**
 	 * Calls custom element event
 	 */
 	function callEvent(settings, event, _this, data) {
-
-		if (settings[event] != null && settings[event] instanceof Function) {
-			settings[event].call(_this, data);
-		}
+		settings[event].call(_this, data);
 	}
 
 })(jQuery);
