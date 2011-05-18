@@ -1,5 +1,8 @@
 <?php
 
+require_once 'InstantMessage/Message/Abstract.php';
+require_once 'InstantMessage/Message/Interface.php';
+
 class InstantMessage_Message_FileMessage extends InstantMessage_Message_Abstract implements InstantMessage_Message_Interface
 {
 	
@@ -57,6 +60,7 @@ class InstantMessage_Message_FileMessage extends InstantMessage_Message_Abstract
 
 		if (!is_readable($file))
 		{
+			require_once 'InstantMessage/Exception.php';
 			throw new InstantMessage_Exception('Can\'t open template: ' . $file);
 		}
 		
@@ -132,7 +136,8 @@ class InstantMessage_Message_FileMessage extends InstantMessage_Message_Abstract
 	{
 		if (null == $path)
 		{
-			$this->_basePath = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'views/scripts';
+			$applicationPath = defined('APPLICATION_PATH') ? APPLICATION_PATH : '';
+			$this->_basePath = $applicationPath . DIRECTORY_SEPARATOR . 'views/scripts';
 		}
 		else
 		{

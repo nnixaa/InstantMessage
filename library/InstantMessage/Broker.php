@@ -1,5 +1,7 @@
 <?php
 
+require_once 'InstantMessage/Message/Interface.php';
+
 class InstantMessage_Broker
 {
 	
@@ -65,10 +67,13 @@ class InstantMessage_Broker
 	public function addMessage($template, $values = null, $type = 'FileMessage', $options = array())
 	{
 		$mesageClass = 'InstantMessage_Message_' . $type;
+		require_once 'InstantMessage/Message/' . $type . '.php';
+		
 		$message = new $mesageClass($template, $values, $options);
 		
 		if (!$message instanceof InstantMessage_Message_Interface)
 		{
+			require_once 'InstantMessage/Exception.php';
 			throw new InstantMessage_Exception('Message should be instance of InstantMessage_Message_Interface');
 		}
 		

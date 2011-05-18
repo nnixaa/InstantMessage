@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Zend/View/Helper/Abstract.php';
+
 class InstantMessage_Helper_RenderMessages extends Zend_View_Helper_Abstract
 {
 	
