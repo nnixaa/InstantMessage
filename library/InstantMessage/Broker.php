@@ -126,6 +126,7 @@ class InstantMessage_Broker
 	
 	/**
 	 * Removes message
+   * TODO: maybe should return bolean?
 	 * @param $message InstantMessage_Message_Interface $index
 	 */
 	public function removeMessageByObject(InstantMessage_Message_Interface $object)
@@ -135,6 +136,7 @@ class InstantMessage_Broker
 			if (spl_object_hash($object) == spl_object_hash($message))
 			{
 				unset($this->_messages[$key]);
+        break;
 			}
 		}
 	}
