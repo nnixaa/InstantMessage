@@ -4,10 +4,10 @@ InstantMessages Tempalate Engine
 This library is open source. Please help me by forking the project and adding to it.
 -----------------------------------------------
 
-Abount
+About
 -----------------------------------------------
 
-A small template engine that allows you easily template your emails, messages, etc. with file or database templates. 
+A small template engine that allows you easily render your emails, messages, etc. with file or database templates. 
 It's really smaller and faster than Views.
 
 Getting Started
@@ -29,6 +29,7 @@ Than fill messages in your controller with data
 	);
 
 	$messages = InstantMessage_Broker::getInstance();
+	
 	foreach ($substitution as $values)
 	{
 		$messages->addMessage('hello', $values, 'FileMessage', array('extension' => '.phtml'));
